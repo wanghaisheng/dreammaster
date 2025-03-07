@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦行者训练营 - 个人中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f5f7;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .ios-status-bar {
+            height: 44px;
+            background-color: #f5f5f7;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 16px;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 83px;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 8px;
+            width: 20%;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .tab-label {
+            font-size: 10px;
+        }
+        .active-tab {
+            color: #5856d6;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 0 0 30px 30px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        .stat-card {
+            border-radius: 16px;
+            transition: transform 0.2s;
+        }
+        .stat-card:active {
+            transform: scale(0.98);
+        }
+        .achievement-badge {
+            border-radius: 16px;
+            transition: transform 0.2s;
+        }
+        .achievement-badge:active {
+            transform: scale(0.98);
+        }
+        .menu-item {
+            transition: background-color 0.2s;
+        }
+        .menu-item:active {
+            background-color: #f3f4f6;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: #e5e7eb;
+            transition: background-color 0.3s;
+        }
+        .toggle-switch.active {
+            background-color: #5856d6;
+        }
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .toggle-switch.active .toggle-handle {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar">
+        <div>9:41</div>
+        <div class="flex space-x-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 个人资料头部 -->
+    <div class="profile-header px-6 pt-6 pb-10">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-white">个人中心</h1>
+            <div class="h-10 w-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                <i class="fas fa-cog text-white"></i>
+            </div>
+        </div>
+        
+        <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=160&q=80" alt="用户头像" class="avatar">
+            <div class="ml-4">
+                <h2 class="text-white text-xl font-bold">梦行者小明</h2>
+                <div class="flex items-center mt-1">
+                    <span class="bg-white bg-opacity-20 text-white text-xs px-2 py-1 rounded-full mr-2">
+                        🧙‍♂️ 织梦者 Lv.3
+                    </span>
+                    <i class="fas fa-chevron-right text-white text-opacity-50 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面内容 -->
+    <div class="px-4 pt-4 pb-24">
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-3 gap-4 -mt-8 mb-6">
+            <div class="stat-card bg-white p-4 shadow-md">
+                <p class="text-gray-500 text-xs mb-1">记录天数</p>
+                <p class="text-2xl font-bold">32</p>
+                <p class="text-green-500 text-xs">
+                    <i class="fas fa-arrow-up mr-1"></i>
+                    5天
+                </p>
+            </div>
+            <div class="stat-card bg-white p-4 shadow-md">
+                <p class="text-gray-500 text-xs mb-1">清醒梦数</p>
+                <p class="text-2xl font-bold">18</p>
+                <p class="text-green-500 text-xs">
+                    <i class="fas fa-arrow-up mr-1"></i>
+                    3次
+                </p>
+            </div>
+            <div class="stat-card bg-white p-4 shadow-md">
+                <p class="text-gray-500 text-xs mb-1">梦币余额</p>
+                <p class="text-2xl font-bold">280</p>
+                <div class="bg-indigo-100 text-indigo-600 text-xs py-0.5 px-1.5 rounded text-center">
+                    兑换
+                </div>
+            </div>
+        </div>
+        
+        <!-- 成就系统 -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">成就勋章</h2>
+                <span class="text-sm text-indigo-600">8/24</span>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-4">
+                <div class="achievement-badge bg-white p-3 flex flex-col items-center">
+                    <div class="h-12 w-12 rounded-full bg-yellow-400 flex items-center justify-center mb-2">
+                        <span class="text-white text-xl">🌈</span>
+                    </div>
+                    <p class="text-xs text-center">第一次抓住彩虹</p>
+                </div>
+                <div class="achievement-badge bg-white p-3 flex flex-col items-center">
+                    <div class="h-12 w-12 rounded-full bg-purple-500 flex items-center justify-center mb-2">
+                        <span class="text-white text-xl">⏱️</span>
+                    </div>
+                    <p class="text-xs text-center">时间刺客</p>
+                </div>
+                <div class="achievement-badge bg-white p-3 flex flex-col items-center">
+                    <div class="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center mb-2">
+                        <span class="text-white text-xl">✈️</span>
+                    </div>
+                    <p class="text-xs text-center">梦中飞行员</p>
+                </div>
+                <div class="achievement-badge bg-white p-3 flex flex-col items-center">
+                    <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mb-2">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center">未解锁</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 道具商店 -->
+        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 mb-6 text-white">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-lg font-semibold">梦境道具商店</h2>
+                    <p class="text-sm opacity-90">用梦币兑换强力道具</p>
+                </div>
+                <div class="bg-white text-indigo-600 rounded-full px-3 py-1 text-sm font-medium">
+                    280 <i class="fas fa-coins ml-1 text-yellow-500"></i>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-white bg-opacity-20 p-3 rounded-lg backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-center mb-2">
+                        <span class="text-xl mr-2">😴</span>
+                        <span class="text-sm font-medium">REM延长眼罩</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs bg-white bg-opacity-30 px-2 py-1 rounded-full">200 <i class="fas fa-coins text-yellow-300"></i></span>
+                        <span class="text-xs">库存: 3</span>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 p-3 rounded-lg backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-center mb-2">
+                        <span class="text-xl mr-2">🛡️</span>
+                        <span class="text-sm font-medium">防惊醒稳定剂</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs bg-white bg-opacity-30 px-2 py-1 rounded-full">150 <i class="fas fa-coins text-yellow-300"></i></span>
+                        <span class="text-xs">库存: 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="bg-white text-indigo-600 w-full py-2 rounded-lg font-medium text-sm">
+                进入商店
+            </button>
+        </div>
+        
+        <!-- 个人设置菜单 -->
+        <div class="bg-white rounded-2xl overflow-hidden mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <h2 class="text-lg font-semibold">个人设置</h2>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <span>提醒设置</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <span>睡眠追踪</span>
+                </div>
+                <div class="toggle-switch active">
+                    <div class="toggle-handle"></div>
+                </div>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <span>数据备份</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <span>防沉迷模式</span>
+                        <p class="text-xs text-gray-500">建议每周训练3-4次</p>
+                    </div>
+                </div>
+                <div class="toggle-switch active">
+                    <div class="toggle-handle"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 账户信息 -->
+        <div class="bg-white rounded-2xl overflow-hidden">
+            <div class="p-4 border-b border-gray-100">
+                <h2 class="text-lg font-semibold">账户信息</h2>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <span>编辑个人资料</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center border-b border-gray-100">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <span>会员信息</span>
+                </div>
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">免费版</span>
+            </div>
+            
+            <div class="menu-item p-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>退出登录</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-home tab-icon"></i>
+            <span class="tab-label">主页</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-book tab-icon"></i>
+            <span class="tab-label">日记</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-plus-circle tab-icon text-2xl"></i>
+            <span class="tab-label">记录</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-dumbbell tab-icon"></i>
+            <span class="tab-label">训练</span>
+        </div>
+        <div class="tab-item active-tab">
+            <i class="fas fa-user tab-icon"></i>
+            <span class="tab-label">我的</span>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦行者训练营 - 情景训练</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f5f7;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .ios-status-bar {
+            height: 44px;
+            background-color: #f5f5f7;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 16px;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 83px;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 8px;
+            width: 20%;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .tab-label {
+            font-size: 10px;
+        }
+        .active-tab {
+            color: #5856d6;
+        }
+        .scenario-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .scenario-card:active {
+            transform: scale(0.98);
+        }
+        .step-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .step-card:active {
+            transform: scale(0.98);
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .feature-tag {
+            font-size: 10px;
+            border-radius: 20px;
+            padding: 2px 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS 状态栏 -->
+    <div class="ios-status-bar">
+        <div>9:41</div>
+        <div class="flex space-x-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 页面内容 -->
+    <div class="px-4 pt-2 pb-24">
+        <!-- 顶部导航栏 -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-2xl font-bold">情景训练</h1>
+                <p class="text-gray-500 text-sm">定制化的梦境场景</p>
+            </div>
+            <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+                <i class="fas fa-sliders-h"></i>
+            </div>
+        </div>
+        
+        <!-- 当前训练 -->
+        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-5 mb-6 text-white">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-lg font-semibold">毕业答辩噩梦</h2>
+                    <p class="text-sm opacity-90">抗压星球特训</p>
+                </div>
+                <span class="bg-white bg-opacity-30 text-xs px-2 py-1 rounded-full">进行中</span>
+            </div>
+            
+            <div class="mb-5">
+                <div class="flex justify-between mb-1 text-sm">
+                    <span>训练进度</span>
+                    <span>3/5</span>
+                </div>
+                <div class="progress-bar bg-white bg-opacity-30 mb-1">
+                    <div class="progress-fill bg-white" style="width: 60%"></div>
+                </div>
+                <p class="text-xs opacity-80">还需完成2次训练达到预期效果</p>
+            </div>
+            
+            <div class="flex space-x-3 mb-4">
+                <div class="bg-white bg-opacity-20 rounded-lg p-2 text-center flex-1">
+                    <p class="text-xs mb-1">紧张控制</p>
+                    <p class="font-bold">68%</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-2 text-center flex-1">
+                    <p class="text-xs mb-1">应变能力</p>
+                    <p class="font-bold">75%</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-2 text-center flex-1">
+                    <p class="text-xs mb-1">表达清晰</p>
+                    <p class="font-bold">82%</p>
+                </div>
+            </div>
+            
+            <button class="bg-white text-indigo-600 w-full py-2 rounded-lg font-medium">
+                继续训练
+            </button>
+        </div>
+        
+        <!-- 训练步骤 -->
+        <h2 class="text-lg font-semibold mb-4">训练步骤</h2>
+        
+        <div class="space-y-4 mb-6">
+            <div class="step-card bg-white p-4">
+                <div class="flex items-start">
+                    <div class="step-number bg-indigo-100 text-indigo-600 mr-3">1</div>
+                    <div>
+                        <h3 class="font-medium mb-2">入梦前准备</h3>
+                        <p class="text-sm text-gray-600 mb-3">入睡前浏览答辩场景图片，设置"紧张指数"触发清醒检查</p>
+                        <div class="flex space-x-2">
+                            <span class="feature-tag bg-indigo-100 text-indigo-600">已完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card bg-white p-4">
+                <div class="flex items-start">
+                    <div class="step-number bg-indigo-100 text-indigo-600 mr-3">2</div>
+                    <div>
+                        <h3 class="font-medium mb-2">触发现实检验</h3>
+                        <p class="text-sm text-gray-600 mb-3">梦中察觉讲台或投影仪出现异常，激活清醒意识</p>
+                        <div class="flex space-x-2">
+                            <span class="feature-tag bg-indigo-100 text-indigo-600">已完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card bg-white p-4">
+                <div class="flex items-start">
+                    <div class="step-number bg-indigo-100 text-indigo-600 mr-3">3</div>
+                    <div>
+                        <h3 class="font-medium mb-2">激活观众情绪插件</h3>
+                        <p class="text-sm text-gray-600 mb-3">召唤"观众情绪可视化"工具，观察评委头顶焦虑值进度条</p>
+                        <div class="flex space-x-2">
+                            <span class="feature-tag bg-indigo-100 text-indigo-600">已完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card bg-white p-4">
+                <div class="flex items-start">
+                    <div class="step-number bg-gray-100 text-gray-600 mr-3">4</div>
+                    <div>
+                        <h3 class="font-medium mb-2">调整演讲节奏</h3>
+                        <p class="text-sm text-gray-600 mb-3">观察评委焦虑值变化，实时调整语速、内容和肢体语言</p>
+                        <div class="flex space-x-2">
+                            <span class="feature-tag bg-gray-100 text-gray-600">未完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card bg-white p-4">
+                <div class="flex items-start">
+                    <div class="step-number bg-gray-100 text-gray-600 mr-3">5</div>
+                    <div>
+                        <h3 class="font-medium mb-2">完成模拟演讲</h3>
+                        <p class="text-sm text-gray-600 mb-3">维持清醒状态完成整个答辩，获取AI评分和改进建议</p>
+                        <div class="flex space-x-2">
+                            <span class="feature-tag bg-gray-100 text-gray-600">未完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 训练提示 -->
+        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl mb-6">
+            <div class="flex items-start">
+                <div class="h-8 w-8 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h3 class="font-medium mb-1">训练提示</h3>
+                    <p class="text-sm text-gray-700">如果演讲中感到过度紧张，尝试想象观众都穿着滑稽的睡衣，这个技巧在现实中也同样有效。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 相关训练 -->
+        <h2 class="text-lg font-semibold mb-4">相关训练</h2>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div class="scenario-card bg-white">
+                <div class="h-24 bg-gradient-to-r from-purple-500 to-pink-500 relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-white">
+                        <span class="text-2xl">🎤</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-medium mb-1 text-sm">即兴演讲挑战</h3>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs px-2 py-1 bg-purple-100 text-purple-600 rounded-full">20分钟</div>
+                        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scenario-card bg-white">
+                <div class="h-24 bg-gradient-to-r from-green-500 to-teal-500 relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-white">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-medium mb-1 text-sm">面试官心理解析</h3>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">30分钟</div>
+                        <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-home tab-icon"></i>
+            <span class="tab-label">主页</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-book tab-icon"></i>
+            <span class="tab-label">日记</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-plus-circle tab-icon text-2xl"></i>
+            <span class="tab-label">记录</span>
+        </div>
+        <div class="tab-item active-tab">
+            <i class="fas fa-dumbbell tab-icon"></i>
+            <span class="tab-label">训练</span>
+        </div>
+        <div class="tab-item text-gray-500">
+            <i class="fas fa-user tab-icon"></i>
+            <span class="tab-label">我的</span>
+        </div>
+    </div>
+</body>
+</html>
